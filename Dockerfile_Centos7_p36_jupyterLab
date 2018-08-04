@@ -1,0 +1,14 @@
+# Centos7 + python3.6 + jupyterlab
+FROM nvidia/cuda:8.0-cudnn6-devel-centos7
+RUN echo "proxy=http://http_proxy:port" >> /etc/yum.conf
+RUN export http_proxy="http://http_proxy:port" && export https_proxy="http://http_proxy:port" && \
+	yum -y update && \
+	yum -y install yum-utils && \
+	yum -y groupinstall development && \
+	yum -y install https://centos7.iuscommunity.org/ius-release.rpm && \
+	yum -y install python36u && \
+	yum -y install python36u-pip && \
+	yum -y install python36u-devel 
+
+RUN export http_proxy="http://http_proxy:port" && export https_proxy="http://http_proxy:port" && \
+	pip3.6 install jupyterlab
