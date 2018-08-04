@@ -1,0 +1,20 @@
+# Ubuntu16.04 + python3.6 + jupyterlab
+FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
+RUN echo "Acquire::http::Proxy \"http://http_proxy:port\";" > /etc/apt/apt.conf && \
+	echo "Acquire::https::Proxy \"http://http_proxy:port\";" >> /etc/apt/apt.conf
+RUN export http_proxy="http://http_proxy:port" && export https_proxy="http://http_proxy:port" && \
+	apt-get -y update && \
+	apt-get -y install vim && \
+	apt-get install -y software-properties-common
+RUN export http_proxy="http://http_proxy:port" && export https_proxy="http://http_proxy:port" && \
+	apt -y install sudo && \
+	apt -y install wget && \
+	sudo -E add-apt-repository ppa:jonathonf/python-3.6 && \
+	sudo apt -y update && \
+	sudo apt -y install python3.6 && \
+	sudo apt -y install python3.6-dev && \
+	sudo apt -y install python3.6-venv && \
+	wget https://bootstrap.pypa.io/get-pip.py && \
+	sudo -E python3.6 get-pip.py 
+RUN export http_proxy="http://http_proxy:port" && export https_proxy="http://http_proxy:port" && \
+	pip3.6 install jupyterlab
