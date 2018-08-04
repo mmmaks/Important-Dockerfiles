@@ -12,3 +12,6 @@ Going inside a container:<br>
 
 
 *Use nvidia-docker when you are building container in GPU, otherwise use docker*
+
+Starting JupyterLab server
+```jupyter lab --no-browser --ip 0.0.0.0 --port 9999 --allow-root```
